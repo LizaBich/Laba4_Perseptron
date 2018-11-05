@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ConsolView
 {
-    public class ConstantViews
+    internal class ConstantViews
     {
+        /// <summary>
+        /// 0 - ^; 1 - ; 2 - E в другую сторону; 3 - {- U; 4 - U -}
+        /// </summary>
         public IList<bool[][]> EtalonValues
         {
             get => new List<bool[][]>
