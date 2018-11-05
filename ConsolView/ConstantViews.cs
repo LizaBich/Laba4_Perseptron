@@ -64,6 +64,28 @@ namespace ConsolView
             };
         }
 
+        public IList<bool[,]> GetMatrix()
+        {
+            var result = new List<bool[,]>();
+
+            foreach (var item in this.EtalonValues)
+            {
+                var temp = new bool[item.Length, item[0].Length];
+
+                for (var j = 0; j < item.Length; ++j)
+                {
+                    for (var i = 0; i < item[0].Length; ++i)
+                    {
+                        temp[j, i] = item[j][i];
+                    }
+                }
+
+                result.Add(temp);
+            }
+
+            return result;
+        }
+
         private string SeparateMassiveToString(int value, int row)
         {
             bool Get(int index) => this.EtalonValues[value][row][index];

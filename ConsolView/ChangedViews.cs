@@ -20,27 +20,33 @@ namespace ConsolView
 
         public void PrepareViewsWithNoise(IList<bool[][]> sources, int[] persentage)
         {
-            var i = 0;
             foreach (var source in sources)
             {
-                this.Views.Add(this.AddNoise(source, persentage[i]));
-                switch (i)
+                foreach (var i in Enumerable.Range(0, 3))
                 {
-                    case 0: 
-                    case 1:
-                        ++i;
-                        break;
-                    case 2:
-                        i = 0;
-                        break;
-
+                    this.Views.Add(this.AddNoise(source, persentage[i]));
                 }
             }
         }
 
+        public bool[,] GetMatrix(int index)
+        {
+            var temp = new bool[this.Views[index].Length, this.Views[index][0].Length];
+
+            for (var j = 0; j < this.Views[index].Length; ++j)
+            {
+                for (var i = 0; i < this.Views[index][0].Length; ++i)
+                {
+                    temp[j, i] = this.Views[index][j][i];
+                }
+            }
+
+            return temp;
+        }
+
         public string ToString(int number)
         {
-            return $"{ this.SeparateMassiveToString(number, 0) }\n\r{ this.SeparateMassiveToString(number, 1) }\n\r{ this.SeparateMassiveToString(number, 2) }\n\r{ this.SeparateMassiveToString(number, 3) }\n\r{ this.SeparateMassiveToString(number, 4) }\n\r{ this.SeparateMassiveToString(number, 5) }\n\r{ this.SeparateMassiveToString(number, 6) }";
+            return $"|{ this.SeparateMassiveToString(number, 0) }|\n\r|{ this.SeparateMassiveToString(number, 1) }|\n\r|{ this.SeparateMassiveToString(number, 2) }|\n\r|{ this.SeparateMassiveToString(number, 3) }|\n\r|{ this.SeparateMassiveToString(number, 4) }|\n\r|{ this.SeparateMassiveToString(number, 5) }|\n\r|{ this.SeparateMassiveToString(number, 6) }|";
         }
 
         private string SeparateMassiveToString(int value, int row)

@@ -60,11 +60,11 @@ namespace NeuralNetwork
         {
             var random = new Random();
 
-            this._borderValue = random.Next(-1, 1);
+            this._borderValue = random.Next(0, 1) == 0 ? -1 : 1;
 
             for (var i = 0; i < this._inputLength; ++i)
             {
-                this.InputWeights[i] = Convert.ToSByte(random.Next(-1, 1));
+                this.InputWeights[i] = Convert.ToSByte(random.Next(0, 1) == 0 ? -1 : 1);
             }
         }
 
@@ -89,7 +89,7 @@ namespace NeuralNetwork
 
         public void AdjustTheWeights(sbyte idealOutput, int a)
         {
-            var coef = a * (idealOutput - this.NeuronOutput) * (this.NeuronOutput == 0 ? float.MaxValue : 0);
+            var coef = a * (idealOutput - this.NeuronOutput) * (this.NeuronOutput == 0 ? 255 : 0);
 
             this._borderValue = this._borderValue + coef;
 
